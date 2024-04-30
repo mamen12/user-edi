@@ -30,7 +30,7 @@ public class UserController {
 		return userService.checkUserDetailOrGetAll(rq);
 	}
 	
-	@PostMapping("/delete")
+	@PostMapping("/user/delete")
 	public UserResponse deleteUser(@RequestBody UserRequest rq){
 		return userService.deleteUser(rq);
 	}

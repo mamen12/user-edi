@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -15,18 +14,15 @@ import com.general.edi.beans.UserRequest;
 import com.general.edi.beans.UserResponse;
 import com.general.edi.entity.UserInfo;
 import com.general.edi.repo.UserRepository;
+import com.general.edi.security.BCrypt;
 import com.general.edi.service.IUserService;
 
-import io.micrometer.common.util.StringUtils;
 import jakarta.transaction.Transactional;
 
 @Service
 public class UserServiceImpl implements IUserService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-	
-	@Autowired
-	private PasswordEncoder encoder;
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -38,7 +34,7 @@ public class UserServiceImpl implements IUserService {
 		userInfo = UserInfo.builder()
 				.namaLengkap(user.getNamaLengkap())
 				.username(user.getUsername())
-				.password(user.getPassword())
+				.password(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()))
 				.status(user.getStatus())
 				.build();
 		

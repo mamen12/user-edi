@@ -16,8 +16,6 @@ public class UserRequest {
 	private String username;
 	private String password;
 	private Character status;
-	@JsonProperty(value = "all")
-	private String allUser;
 	
 	
 }
