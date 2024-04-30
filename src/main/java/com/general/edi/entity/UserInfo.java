@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name="mt_user")
+@Table(name="tm_user")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,14 +49,10 @@ public class UserInfo implements Serializable {
     
     @Column(name = "updated_by")
     private String updatedBy;
-    
-    @Column(name = "deleted_at")
-    private Date deletedAt;
-    
-    @Column(name = "deleted_by")
-    private String deletedBy;
 
     @Column(name = "last_login")
     private Date lastLogin;
+    
+    private Character status;
 }
 
